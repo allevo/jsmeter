@@ -1,0 +1,37 @@
+{
+  "name": "jstuning",
+  "version": "0.0.1",
+  "description": "An handler to calculate elapsed time",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint . && ./node_modules/.bin/mocha -R tap test"
+  },
+  "author": "allevo",
+  "license": "MIT",
+  "dependencies": {
+    "microtime": "^1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "jshint": "*",
+    "mongodb": "^1.4.23",
+    "mongoose": "^3.8.20"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allevo/jstuning.git"
+  },
+  "keywords": [
+    "performance",
+    "track",
+    "mongodb",
+    "mongoose"
+  ],
+  "bugs": {
+    "url": "https://github.com/allevo/jstuning/issues"
+  },
+  "homepage": "https://github.com/allevo/jstuning"
+}
