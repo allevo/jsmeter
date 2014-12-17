@@ -68,17 +68,29 @@ describe('mongoose', function() {
         cat.save(done);
       });
 
-      it('handler should be called', function() {
-        assert.equal(1, messages.length);
+      it('handler should have two message', function() {
+        assert.equal(2, messages.length);
       });
-      it('should be an insert', function() {
-        assert.equal('insert', messages[0]['0'].type);
+
+      describe('first', function() {
+        it('should be an insert', function() {
+          assert.equal('validation', messages[0]['0'].type);
+        });
+        it('should have right document', function() {
+          assert.equal('birba', messages[0]['0'].params.document.name);
+        });
       });
-      it('should have one document', function() {
-        assert.equal(1, messages[0]['0'].params.documents.length);
-      });
-      it('should have one document', function() {
-        assert.equal('birba', messages[0]['0'].params.documents[0].name);
+
+      describe('second', function() {
+        it('should be an insert', function() {
+          assert.equal('insert', messages[1]['0'].type);
+        });
+        it('should have one document', function() {
+          assert.equal(1, messages[1]['0'].params.documents.length);
+        });
+        it('should have one document', function() {
+          assert.equal('birba', messages[1]['0'].params.documents[0].name);
+        });
       });
     });
 
@@ -91,17 +103,29 @@ describe('mongoose', function() {
         setTimeout(done, 100);
       });
 
-      it('handler should be called', function() {
-        assert.equal(1, messages.length);
+      it('handler should have two message', function() {
+        assert.equal(2, messages.length);
       });
-      it('should be an insert', function() {
-        assert.equal('insert', messages[0]['0'].type);
+
+      describe('first', function() {
+        it('should be an insert', function() {
+          assert.equal('validation', messages[0]['0'].type);
+        });
+        it('should have right document', function() {
+          assert.equal('birba', messages[0]['0'].params.document.name);
+        });
       });
-      it('should have one document', function() {
-        assert.equal(1, messages[0]['0'].params.documents.length);
-      });
-      it('should have one document', function() {
-        assert.equal('birba', messages[0]['0'].params.documents[0].name);
+
+      describe('second', function() {
+        it('should be an insert', function() {
+          assert.equal('insert', messages[1]['0'].type);
+        });
+        it('should have one document', function() {
+          assert.equal(1, messages[1]['0'].params.documents.length);
+        });
+        it('should have one document', function() {
+          assert.equal('birba', messages[1]['0'].params.documents[0].name);
+        });
       });
     });
   });
@@ -663,20 +687,33 @@ describe('mongoose', function() {
         Cat.create({name: 'birba'}, done);
       });
 
-      it('handler should be called', function() {
-        assert.equal(1, messages.length);
+
+      it('handler should have two message', function() {
+        assert.equal(2, messages.length);
       });
-      it('should be on right collection', function() {
-        assert.equal('test.cats', messages[0]['0'].params.collectionName);
+
+      describe('first', function() {
+        it('should be an insert', function() {
+          assert.equal('validation', messages[0]['0'].type);
+        });
+        it('should have right document', function() {
+          assert.equal('birba', messages[0]['0'].params.document.name);
+        });
       });
-      it('should be an insert', function() {
-        assert.equal('insert', messages[0]['0'].type);
-      });
-      it('should have one document', function() {
-        assert.deepEqual(1, messages[0]['0'].params.documents.length);
-      });
-      it('should have the right document', function() {
-        assert.deepEqual('birba', messages[0]['0'].params.documents[0].name);
+
+      describe('second', function() {
+        it('should be on right collection', function() {
+          assert.equal('test.cats', messages[1]['0'].params.collectionName);
+        });
+        it('should be an insert', function() {
+          assert.equal('insert', messages[1]['0'].type);
+        });
+        it('should have one document', function() {
+          assert.deepEqual(1, messages[1]['0'].params.documents.length);
+        });
+        it('should have the right document', function() {
+          assert.deepEqual('birba', messages[1]['0'].params.documents[0].name);
+        });
       });
     });
 
@@ -689,19 +726,30 @@ describe('mongoose', function() {
       });
 
       it('handler should be called', function() {
-        assert.equal(1, messages.length);
+        assert.equal(2, messages.length);
       });
-      it('should be on right collection', function() {
-        assert.equal('test.cats', messages[0]['0'].params.collectionName);
+      describe('first', function() {
+        it('should be an insert', function() {
+          assert.equal('validation', messages[0]['0'].type);
+        });
+        it('should have right document', function() {
+          assert.equal('birba', messages[0]['0'].params.document.name);
+        });
       });
-      it('should be an insert', function() {
-        assert.equal('insert', messages[0]['0'].type);
-      });
-      it('should have one document', function() {
-        assert.deepEqual(1, messages[0]['0'].params.documents.length);
-      });
-      it('should have the right document', function() {
-        assert.deepEqual('birba', messages[0]['0'].params.documents[0].name);
+
+      describe('second', function() {
+        it('should be on right collection', function() {
+          assert.equal('test.cats', messages[1]['0'].params.collectionName);
+        });
+        it('should be an insert', function() {
+          assert.equal('insert', messages[1]['0'].type);
+        });
+        it('should have one document', function() {
+          assert.deepEqual(1, messages[1]['0'].params.documents.length);
+        });
+        it('should have the right document', function() {
+          assert.deepEqual('birba', messages[1]['0'].params.documents[0].name);
+        });
       });
     });
   });

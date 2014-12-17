@@ -2,42 +2,22 @@
 
 
 var microtime = require('microtime');
+var ValidateOperation = require('./operation').ValidateOperation;
+
 
 module.exports = function(mongoose, handler) {
   require('./perf_mongodb')(mongoose.mongo, handler);
 
-  /*
-  var Collection = mongoose.mongo.Collection;
+  var Document = mongoose.Document;
+  var _oldValidateDocument = Document.prototype.validate;
 
-  function wrap(name, func) {
-    return function() {
-      var count = Object.keys(arguments).length;
+  Document.prototype.validate = function(callback) {
+    var start = microtime.nowDouble();
+    var doc = this;
 
-      var callback = arguments[count - 1];
-      if (typeof callback === 'function') {
-        var start = microtime.nowDouble();
-        arguments[count - 1] = function() {
-          handler(name, microtime.nowDouble() - start);
-          callback.apply(this, arguments);
-        };
-      }
-      return func.apply(this, arguments);
-    };
-  }
-
-  var _old = {
-    mongoose: {
-      mongodb: {
-        collection: {}
-      }
-    }
+    _oldValidateDocument.apply(this, [function() {
+      handler(new ValidateOperation(doc), microtime.nowDouble() - start);
+      callback.apply(this, arguments);
+    }]);
   };
-
-  var props = ['insert', 'update', 'remove', 'find', 'distinct', 'count', 'drop', 'findAndModify', 'findOne', 'createIndex', 'indexInformation', 'dropAllIndexes', 'mapReduce', 'group', 'options', 'indexExists', 'geoNear', 'geoHaystackSearch', 'indexes', 'aggregate', 'stats'];
-  for(var i in props) {
-    var prop = props[i];
-    _old.mongoose.mongodb.collection[prop] = Collection.prototype[prop];
-    Collection.prototype[prop] = wrap('Collection.' + prop, _old.mongoose.mongodb.collection[prop]);
-  }
-  */
 };
