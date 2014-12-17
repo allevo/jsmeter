@@ -1,6 +1,8 @@
 JS Tuning
 =======
 
+[![Build Status](https://travis-ci.org/allevo/jstuning.svg)](https://travis-ci.org/allevo/jstuning)
+
 Inspect your code to track its performance
 
 
