@@ -95,8 +95,9 @@ describe('mongoose', function() {
     });
 
     describe('without callback', function() {
-      before(eraseMessages);
       before(dropAllCollections);
+      before(Cat.ensureIndexes.bind(Cat));
+      before(eraseMessages);
       before(function(done) {
         var cat = new Cat({name: 'birba'});
         cat.save();
